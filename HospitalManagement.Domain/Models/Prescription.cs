@@ -26,6 +26,7 @@ namespace HospitalManagement.Domain.Models
         public DateTime DatePrescribed { get; set; } = DateTime.Now;
 
         public string Remark { get; set; }
+        public bool isDispensed { get; set; }
 
         //public int CourseDurationDays { get; set; }
            

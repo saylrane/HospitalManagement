@@ -12,8 +12,9 @@ namespace HospitalManagement.Domain.Models
         public string ManufacturerName { get; set; }
         public decimal Price { get; set; }
 
-
-          public ICollection<Inventory> Inventory { get; set; } = new List<Inventory>();
+        public int StockQuantity { get; set; }
+        public DateTime LastUpdated { get; set; } = DateTime.Now;
+        //public ICollection<Inventory> Inventory { get; set; } = new List<Inventory>();
 
     }
 }
