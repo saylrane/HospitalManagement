@@ -7,7 +7,7 @@ namespace HospitalManagement.Infrastructure.Data
         public static async Task SeedRolesAndAdminAsync(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
         {
             // Define roles
-            string[] roles = { "Admin", "Doctor", "Patient" };
+            string[] roles = { "Admin", "Doctor", "Patient", "Pharmacist", "Receptionist" };
 
             // Create roles if they don't exist
             foreach (var role in roles)
@@ -36,6 +36,48 @@ namespace HospitalManagement.Infrastructure.Data
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(newAdminUser, "Admin");
+                }
+            }
+
+            // Create default Pharmacist user
+            const string pharmacistEmail = "pharmacist@hospital.com";
+            const string pharmacistPassword = "Pharmacy123!";
+
+            var pharmacistUser = await userManager.FindByEmailAsync(pharmacistEmail);
+            if (pharmacistUser == null)
+            {
+                var newPharmacistUser = new IdentityUser
+                {
+                    UserName = pharmacistEmail,
+                    Email = pharmacistEmail,
+                    EmailConfirmed = true
+                };
+
+                var result = await userManager.CreateAsync(newPharmacistUser, pharmacistPassword);
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(newPharmacistUser, "Pharmacist");
+                }
+            }
+
+            // Create default Receptionist user
+            const string receptionistEmail = "receptionist@hospital.com";
+            const string receptionistPassword = "Reception123!";
+
+            var receptionistUser = await userManager.FindByEmailAsync(receptionistEmail);
+            if (receptionistUser == null)
+            {
+                var newReceptionistUser = new IdentityUser
+                {
+                    UserName = receptionistEmail,
+                    Email = receptionistEmail,
+                    EmailConfirmed = true
+                };
+
+                var result = await userManager.CreateAsync(newReceptionistUser, receptionistPassword);
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(newReceptionistUser, "Receptionist");
                 }
             }
         }

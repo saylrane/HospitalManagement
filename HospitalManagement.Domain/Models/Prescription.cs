@@ -26,10 +26,11 @@ namespace HospitalManagement.Domain.Models
         public DateTime DatePrescribed { get; set; } = DateTime.Now;
 
         public string Remark { get; set; }
-        public bool isDispensed { get; set; }
+        public bool isDispensed { get; set; } = false;
+        public DateTime? DispensedAt { get; set; }
 
         //public int CourseDurationDays { get; set; }
-           
+
         public ICollection<PrescriptionItems> PrescriptionItems { get; set; } = new List<PrescriptionItems>();
 
     }

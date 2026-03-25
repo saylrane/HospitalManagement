@@ -18,6 +18,8 @@ namespace HospitalManagement.Domain.Models
         public int Age { get; set; }
         public string Bloodgroup { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public bool IsDeleted { get; set; } = false;
+        public string UserId { get; set; }
 
         public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
 
